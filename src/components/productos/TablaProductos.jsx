@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import { Table, Spinner } from "react-bootstrap";
-
-import BotonOrden from "..//ordenamiento/BotonOrden.jsx"
-
+import { Table, Spinner, Button } from "react-bootstrap";
+import BotonOrden from "../ordenamiento/BotonOrden.jsx";
+import Paginacion from "../ordenamiento/Paginacion";
 import PropTypes from "prop-types";
 
-const TablaProductos = ({ productos, cargando }) => {
+const TablaProductos = ({
+  productos,
+  cargando,
+  abrirModalEdicion,
+  abrirModalEliminacion,
+  totalElementos,
+  elementosPorPagina,
+  paginaActual,
+  establecerPaginaActual
+}) => {
 
-  // ----------------------------------------------------------------------------------------------
-  // Componente de tabla de categorias que recibe las categorias y el estado de carga como props.
+  // -------------------------------------------------------------------------
+  // Estado de ordenamiento
   const [orden, setOrden] = useState({ campo: "id_producto", direccion: "asc" });
-
-
 
   const manejarOrden = (campo) => {
     setOrden((prev) => ({
@@ -21,6 +27,7 @@ const TablaProductos = ({ productos, cargando }) => {
     }));
   };
 
+  // Ordenamiento de productos
   const productosOrdenados = [...productos].sort((a, b) => {
     const valorA = a[orden.campo];
     const valorB = b[orden.campo];
@@ -33,8 +40,8 @@ const TablaProductos = ({ productos, cargando }) => {
     return orden.direccion === "asc" ? comparacion : -comparacion;
   });
 
-  // --------------------------------------------------------------------------------------------
-
+  // -------------------------------------------------------------------------
+  // Spinner de carga
   if (cargando) {
     return (
       <>
@@ -43,8 +50,10 @@ const TablaProductos = ({ productos, cargando }) => {
         </Spinner>
       </>
     );
-  };
+  }
 
+  // -------------------------------------------------------------------------
+  // Renderización de tabla
   return (
     <>
       <Table striped bordered hover>
@@ -75,46 +84,73 @@ const TablaProductos = ({ productos, cargando }) => {
                 Stock
               </BotonOrden>
             </th>
-            <th>
-              Imagen
-            </th>
-            <th>
-              Acciones
-            </th>
+            <th>Imagen</th>
+            <th>Acciones</th>
           </tr>
         </thead>
+
         <tbody>
-          {productosOrdenados.map((producto) => {
-            return (
-              <tr key={producto.id_producto}>
-                <td>{producto.id_producto}</td>
-                <td>{producto.nombre_producto}</td>
-                <td>{producto.descripcion_producto}</td>
-                <td>{producto.precio_unitario}</td>
-                <td>{producto.stock}</td>
-                <td>
-                  {producto.imagen ? (
-                    <img
-                      src={`data:image/png;base64,${producto.imagen}`}
-                      alt={producto.nombre_producto}
-                      width={50}
-                      height={50}
-                      style={{ objectFit: "cover" }}
-                    />
-                  ) : (
-                    'Sin imagen'
-                  )}
-                </td>
-                <td>Acción</td>
-              </tr>
-            );
-          })}
+          {productosOrdenados.map((producto) => (
+            <tr key={producto.id_producto}>
+              <td>{producto.id_producto}</td>
+              <td>{producto.nombre_producto}</td>
+              <td>{producto.descripcion_producto}</td>
+              <td>{producto.precio_unitario}</td>
+              <td>{producto.stock}</td>
+              <td>
+                {producto.imagen ? (
+                  <img
+                    src={
+                      producto.imagen.startsWith("data:")
+                        ? producto.imagen
+                        : `data:image/png;base64,${producto.imagen}`
+                    }
+                    alt={producto.nombre_producto}
+                    width={50}
+                    height={50}
+                    style={{ objectFit: "cover", borderRadius: "5px" }}
+                  />
+                ) : (
+                  "Sin imagen"
+                )}
+              </td>
+
+              <td>
+                <Button
+                  variant="outline-warning"
+                  size="sm"
+                  className="me-2"
+                  onClick={() => abrirModalEdicion(producto)}
+                >
+                  <i className="bi bi-pencil"></i>
+                </Button>
+
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={() => abrirModalEliminacion(producto)}
+                >
+                  <i className="bi bi-trash"></i>
+                </Button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
+
+      {/* Paginación */}
+      <Paginacion
+        elementosPorPagina={elementosPorPagina}
+        totalElementos={totalElementos}
+        paginaActual={paginaActual}
+        establecerPaginaActual={establecerPaginaActual}
+      />
     </>
   );
 };
 
+// -----------------------------------------------------------------------------
+// Validación de props
 TablaProductos.propTypes = {
   productos: PropTypes.arrayOf(
     PropTypes.shape({
@@ -122,10 +158,17 @@ TablaProductos.propTypes = {
       nombre_producto: PropTypes.string.isRequired,
       descripcion_producto: PropTypes.string,
       precio_unitario: PropTypes.number.isRequired,
-      stock: PropTypes.number.isRequired
+      stock: PropTypes.number.isRequired,
+      imagen: PropTypes.string
     })
   ).isRequired,
   cargando: PropTypes.bool.isRequired,
+  abrirModalEdicion: PropTypes.func,
+  abrirModalEliminacion: PropTypes.func,
+  totalElementos: PropTypes.number,
+  elementosPorPagina: PropTypes.number,
+  paginaActual: PropTypes.number,
+  establecerPaginaActual: PropTypes.func
 };
 
 export default TablaProductos;
