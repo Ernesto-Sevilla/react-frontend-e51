@@ -3,122 +3,92 @@ import { useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 
 const Encabezado = () => {
-  const [mostrarMenu, setMostrarMenu] = useState(false);
-  const navigate = useNavigate();
+    const [mostrarMenu, setMostrarMenu] = useState(false);
+    const navigate = useNavigate();
 
-  // Alternar visibilidad del menú
-  const manejarToggle = () => setMostrarMenu(!mostrarMenu);
+    // Alternar visibilidad del menú
+    const manejarToggle = () => setMostrarMenu(!mostrarMenu);
 
-  // Navegar y cerrar menú
-  const manejarNavegacion = (ruta) => {
-    navigate(ruta);
-    setMostrarMenu(false);
-  };
+// Navegar y cerrar menú  
 
-  return (
-    <Navbar expand="md" fixed="top" className="bg-primary">
-      <Container>
-        <Navbar.Brand
-          onClick={() => manejarNavegacion("/inicio")}
-          className="text-white fw-bold"
-          style={{ cursor: "pointe" }}
-        >
-          Ferretería
-        </Navbar.Brand>
+    const manejarNavegacion = (ruta) => {
+        navigate(ruta);
+        setMostrarMenu(false);
+    };
 
-        <Navbar.Toggle
-          aria-controls="menu-offcanvas"
-          onClick={manejarToggle}
-          className="bg-primary"
-        />
-        <Navbar.Offcanvas
-          id="menu-offcanvas"
-          placement="end"
-          show={mostrarMenu}
-          onHide={() => setMostrarMenu(false)}
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Menú principal</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="flex-grow-1 pe-3">
-              <Nav.Link
-                id="enlaceernesto"
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/inicio")}
-              >
-                {mostrarMenu ? <i className="bi-house-fill me-2"></i> : null} Inicio
-              </Nav.Link>
+    return (
+        <Navbar expand="md" fixed="top" className="barbie">
+            <Container>
+                <Navbar.Brand
+                    onClick={() => manejarNavegacion("/inicio")}
+                    className="text-white fw-bold"
+                    style={{ cursor: "pointer" }}
+                >
+                    Ferretería
+                </Navbar.Brand>
 
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/categorias")}
-              >
-                {mostrarMenu ? <i className="bi bi-bookmark"></i> : null} Categorías
-              </Nav.Link>
+                <Navbar.Toggle
+                    aria-controls="menu-offcanvas"
+                    onClick={manejarToggle}
+                    className="bg-light"
+                />
+                <Navbar.Offcanvas
+                    id="menu-offcanvas"
+                    placement="end"
+                    show={mostrarMenu}
+                    onHide={() => setMostrarMenu(false)}
+                >
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>Menú principal</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <Nav className="flex-grow-1 pe-3">
+                            <Nav.Link 
+                            onClick={() => manejarNavegacion("/inicio")}
+                            >
+                                Inicio
+                            </Nav.Link>
 
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/productos")}
-              >
-                {mostrarMenu ? <i className="bi bi-archive"> </i> : null} Productos
-              </Nav.Link>
+                            <Nav.Link 
+                            onClick={() => manejarNavegacion("/categorias")}
+                            >
+                                Categorías
+                                </Nav.Link>
 
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/clientes")}
-              >
-                {mostrarMenu ? <i className="bi bi-person-square"> </i> : null} Clientes
-              </Nav.Link>
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/empleados")}
-              >
-                {mostrarMenu ? <i className="bi bi-people-fill"> </i> : null} Empleados
+                            <Nav.Link 
+                            onClick={() => manejarNavegacion("/productos")}
+                            >
+                                Productos
+                                </Nav.Link>
 
-              </Nav.Link>
+                                
 
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/compras")}
-              >
-                {mostrarMenu ? <i className="bo bi-bag"> </i> : null} Compras
+                            <Nav.Link 
+                            onClick={() => manejarNavegacion("/compras")}
+                            >
+                                Compras
+                                </Nav.Link>
 
-              </Nav.Link>
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/usuario")}
-              >
-                {mostrarMenu ? <i className="bi bi-person-circle"> </i> : null} Usuario
-              </Nav.Link>
+                            <Nav.Link 
 
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/ventas")}
-              >
-                {mostrarMenu ? <i className="bi bi-cash-stack"> </i> : null } Ventas
-              </Nav.Link>
+                            onClick={() => manejarNavegacion("/catalogo")}
+                            >
+                                Catálogo
+                            </Nav.Link>
 
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/login")}
-              >
-                {mostrarMenu ? <i className="bi bi-door-open"> </i> : null} Login
-              </Nav.Link>
-
-              <Nav.Link
-                className={mostrarMenu ? "texto-marca" : "text-white"}
-                onClick={() => manejarNavegacion("/catalogo")}
-              >
-                {mostrarMenu ? <i className="bi bi-box-seam"> </i> : null} Catálogo
-              </Nav.Link>
-              
-            </Nav>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
-      </Container>
-    </Navbar>
-  );
+                            <Nav.Link
+                            onClick={() => manejarNavegacion("/clientes")}>Clientes</Nav.Link>
+                            <Nav.Link onClick={() => manejarNavegacion("/empleados")}>Empleados</Nav.Link>
+                            <Nav.Link onClick={() => manejarNavegacion("/usuarios")}>Usuarios</Nav.Link>
+                            <Nav.Link onClick={() => manejarNavegacion("/ventas")}>Ventas</Nav.Link>
+                            <Nav.Link onClick={() => manejarNavegacion("/login")}>Login</Nav.Link>
+                        </Nav>
+                    </Offcanvas.Body>
+                </Navbar.Offcanvas>
+            </Container>
+        </Navbar>
+    );
 };
 
 export default Encabezado;
+

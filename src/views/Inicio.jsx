@@ -1,11 +1,12 @@
-
+import React, { useState} from 'react' ;
 
 const Inicio = () => {
+    
     return (
         <>
-        
+            <h2>Pagina de Inicio Bienvenid@</h2> 
         </>
     );
-};
+}
 
 export default Inicio;

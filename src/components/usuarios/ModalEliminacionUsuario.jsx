@@ -1,9 +1,9 @@
 import { Modal, Button } from "react-bootstrap";
 
-const ModalEliminacionCategoria = ({
+const ModalEliminacionUsuario = ({
     mostrar,
     setMostrar,
-    categoria,
+    usuario,
     confirmarEliminacion,
 }) => {
     return (
@@ -13,8 +13,10 @@ const ModalEliminacionCategoria = ({
             </Modal.Header>
             <Modal.Body>
                 <p>
-                    ¿Estás seguro de que deseas eliminar la categoría{" "}
-                    <strong>"{categoria?.nombre_categoria}"</strong>?
+                    ¿Estás seguro de que deseas eliminar al usuario{" "}
+                    <strong>
+                        {usuario?.usuario} {usuario?.contraseña}
+                    </strong>?
                 </p>
                 <p className="text-muted small">
                     Esta acción no se puede deshacer.
@@ -32,5 +34,4 @@ const ModalEliminacionCategoria = ({
     );
 };
 
-export default ModalEliminacionCategoria;
-
+export default ModalEliminacionUsuario;

@@ -1,25 +1,27 @@
-import React from 'react'
-import "./App.css";
+// src/App.jsximport Titulo from "./componentes/Titulo";
+import { useState } from "react";
+import './App.css';
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //Importar componente Encabezado.
-import Encabezado from "./components/navegacion/Encabezado.jsx";
+import Encabezado from "./components/Navegacion/Encabezado";
 
 //Importar las vistas.
-import Login from "./views/Login";
-import Inicio from "./views/Inicio";
-import Categorias from "./views/Categorias";
-import Productos from "./views/Productos";
-import Catalogo from "./views/Catalogo";
-import Clientes from "./views/Clientes";
-import Empleados from "./views/Empleados";
-import Compras from "./views/Compras";
-import Usuario from "./views/Usuario";
-import Ventas from "./views/Ventas";
+import Login from "./Views/Login";
+import Inicio from "./Views/Inicio";
+import Categorias from "./Views/Categorias";
+import Compras from "./Views/Compras";
+import Productos from "./Views/Productos";
+import Catalogo from "./Views/Catalogo";
+import Clientes from './Views/Clientes';
+import Empleados from './Views/Empleados';
+import Usuarios from './Views/Usuarios';
+import Ventas from './Views/Ventas';
 
 //Importar archivo de estilos.
 import "./App.css";
 
-const App = () =>{
+const App = () => {
   return (
     <Router>
       <Encabezado />
@@ -28,13 +30,14 @@ const App = () =>{
           <Route path="/" element={<Inicio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/categorias" element={<Categorias />} />
+          <Route path="/compras" element={<Compras/>} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/empleados" element={<Empleados />} />
-          <Route path="/compras" element={<Compras />} />
-          <Route path="/usuario" element={<Usuario />} />
+          <Route path="/usuarios" element={<Usuarios />} />
           <Route path="/ventas" element={<Ventas />} />
+          
           <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
         </Routes>
       </main>

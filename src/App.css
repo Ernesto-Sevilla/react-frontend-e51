@@ -3,14 +3,16 @@
     padding: 20px;
 }
 
-.texto-marca {
-    color: rgb(138, 43, 226);
+.barbie {
+    background-color: rgb(21, 103, 255);
 }
 
-.color-verde-chocoyo{
-    color: green;
+.color-boton-registro {
+    background-color: rgb(32, 16, 249);
+    border-color:black; 
 }
 
-.color-boton{
-    background-color: rgb(37, 114, 202);
+.color-boton-registro:hover{
+    background-color: rgb(51, 51, 244);
+    border-color:rgb(88, 38, 238); 
 }

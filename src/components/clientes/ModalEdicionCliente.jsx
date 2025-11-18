@@ -1,25 +1,22 @@
 import { Modal, Form, Button, Row, Col } from "react-bootstrap";
 
-const ModalEdicionEmpleado = ({
+const ModalEdicionCliente = ({
     mostrar,
     setMostrar,
-    empleadoEditado,
-    setEmpleadoEditado,
+    clienteEditado,
+    setClienteEditado,
     guardarEdicion,
 }) => {
 
     const manejarCambio = (e) => {
         const { name, value } = e.target;
-        setEmpleadoEditado((prev) => ({ ...prev, [name]: value }));
-
-        const hoy = new Date().toISOString().split("T")[0];
-
+        setClienteEditado((prev) => ({ ...prev, [name]: value }));
     };
 
     return (
         <Modal backdrop="static" show={mostrar} onHide={() => setMostrar(false)} centered>
             <Modal.Header closeButton>
-                <Modal.Title>Editar Empleado</Modal.Title>
+                <Modal.Title>Editar Cliente</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -30,7 +27,7 @@ const ModalEdicionEmpleado = ({
                                 <Form.Control
                                     type="text"
                                     name="primer_nombre"
-                                    value={empleadoEditado?.primer_nombre || ''}
+                                    value={clienteEditado?.primer_nombre || ''}
                                     onChange={manejarCambio}
                                     maxLength={20}
                                     required
@@ -43,7 +40,7 @@ const ModalEdicionEmpleado = ({
                                 <Form.Control
                                     type="text"
                                     name="segundo_nombre"
-                                    value={empleadoEditado?.segundo_nombre || ''}
+                                    value={clienteEditado?.segundo_nombre || ''}
                                     onChange={manejarCambio}
                                     maxLength={20}
                                 />
@@ -58,7 +55,7 @@ const ModalEdicionEmpleado = ({
                                 <Form.Control
                                     type="text"
                                     name="primer_apellido"
-                                    value={empleadoEditado?.primer_apellido || ''}
+                                    value={clienteEditado?.primer_apellido || ''}
                                     onChange={manejarCambio}
                                     maxLength={20}
                                     required
@@ -71,7 +68,7 @@ const ModalEdicionEmpleado = ({
                                 <Form.Control
                                     type="text"
                                     name="segundo_apellido"
-                                    value={empleadoEditado?.segundo_apellido || ''}
+                                    value={clienteEditado?.segundo_apellido || ''}
                                     onChange={manejarCambio}
                                     maxLength={20}
                                 />
@@ -79,43 +76,37 @@ const ModalEdicionEmpleado = ({
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Col md={6}>
-                            <Form.Group className="mb-3" controlId="celular">
-                                <Form.Label>Celular</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="celular"
-                                    value={empleadoEditado?.celular || ''}
-                                    onChange={manejarCambio}
-                                    maxLength={8}
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                            <Form.Group className="mb-3" controlId="cargo">
-                                <Form.Label>Cargo</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="cargo"
-                                    value={empleadoEditado?.cargo || ''}
-                                    onChange={manejarCambio}
-                                    maxLength={20}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-
-                    <Form.Group className="mb-3" controlId="fecha_contratacion">
-                        <Form.Label>Fecha de Contratación </Form.Label>
+                    <Form.Group className="mb-3" controlId="celular">
+                        <Form.Label>Celular</Form.Label>
                         <Form.Control
-                            type="date"
-                            name="fecha_contratacion"
-                            value={new Date().toISOString().split("T")[0]}
-                            disabled
+                            type="text"
+                            name="celular"
+                            value={clienteEditado?.celular || ''}
+                            onChange={manejarCambio}
+                            maxLength={8}
                         />
+                    </Form.Group>
 
-                        
+                    <Form.Group className="mb-3" controlId="direccion">
+                        <Form.Label>Dirección</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="direccion"
+                            value={clienteEditado?.direccion || ''}
+                            onChange={manejarCambio}
+                            maxLength={50}
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="cedula">
+                        <Form.Label>Cédula</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="cedula"
+                            value={clienteEditado?.cedula || ''}
+                            onChange={manejarCambio}
+                            maxLength={15}
+                        />
                     </Form.Group>
 
                 </Form>
@@ -128,9 +119,8 @@ const ModalEdicionEmpleado = ({
                     variant="primary"
                     onClick={guardarEdicion}
                     disabled={
-                        !empleadoEditado?.primer_nombre?.trim() ||
-                        !empleadoEditado?.primer_apellido?.trim() ||
-                        !empleadoEditado?.fecha_contratacion
+                        !clienteEditado?.primer_nombre?.trim() ||
+                        !clienteEditado?.primer_apellido?.trim()
                     }
                 >
                     Guardar Cambios
@@ -140,4 +130,4 @@ const ModalEdicionEmpleado = ({
     );
 };
 
-export default ModalEdicionEmpleado;
+export default ModalEdicionCliente;
